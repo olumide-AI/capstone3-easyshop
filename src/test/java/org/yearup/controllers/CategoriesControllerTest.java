@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
+import org.yearup.data.mysql.MySqlCategoryDao;
 import org.yearup.models.Category;
 
 import javax.sql.DataSource;
@@ -41,7 +42,8 @@ public class CategoriesControllerTest {
 
     @InjectMocks
     CategoriesController controller;
-    CategoryDao dao;
+    @InjectMocks
+    MySqlCategoryDao mySqlCategoryDao;
 
     @Test
     public void getAllCategoriesEmptyListTest(){
@@ -110,6 +112,23 @@ public class CategoriesControllerTest {
         assertThat(result).isNotNull();
         assertThat(result.getCategoryId()).isEqualTo(101);
         verify(categoryDao).create(category);
+    }
+
+    @Test
+    public void updateCategoryTest() throws SQLException {
+        // Arrange
+        int categoryId = 6;
+        Category updatedCategory = new Category(categoryId, "Toys", "Baby toys");
+
+        when(dataSource.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(ps);
+        when(ps.executeUpdate()).thenReturn(6);
+
+        //Act
+        boolean updateResult = mySqlCategoryDao.update(categoryId,updatedCategory);
+
+        //Assert
+        assertThat(updateResult).isTrue();
     }
 
 }
