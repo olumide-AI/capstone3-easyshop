@@ -1,20 +1,16 @@
-package org.yearup.controllers;
+package org.yearup.data.mysql;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.yearup.controllers.CategoriesController;
 import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
-import org.yearup.data.mysql.MySqlCategoryDao;
 import org.yearup.models.Category;
 
 import javax.sql.DataSource;
@@ -28,7 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CategoriesControllerTest {
+public class CategoriesDaoTest {
     /*
      *Mockito creates a mock(clone) for your class and gives developer
      * more flexibility to test.
