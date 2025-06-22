@@ -104,9 +104,24 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public void update(int categoryId, Category category)
+    public boolean update(int categoryId, Category category)
     {
         // update category
+        String query = "UPDATE categories SET name = ? WHERE categories_id = ? ";
+        try(
+                Connection connection = dataSource.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query)
+                ){
+            ps.setString(1,category.getName());
+            ps.setInt(2, categoryId);
+
+            int affectedRows = ps.executeUpdate();
+            return affectedRows > 0;
+        }
+        catch (SQLException e){
+            System.out.println("update error in our database: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override
