@@ -14,6 +14,7 @@ import org.yearup.models.Category;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CategoriesControllerTest {
@@ -47,6 +48,19 @@ public class CategoriesControllerTest {
         assertThat(categoryList).isNotEmpty()
                 .isEqualTo(expectedCategoryList)
                 .hasSize(2);
+
+    }
+    @Test
+    public void getCategoriesByIdTest(){
+        Category charger = new Category(1, "charger", "A phone charger");
+        Category iphone = new Category(2, "iphone", "An iPhone");
+        //arrange
+        when(categoryDao.getById(1)).thenReturn(charger);
+        //act
+        Category category = categoryDao.getById(1);
+        //assert
+        assertThat(category).isEqualTo(charger);
+        verify(categoryDao).getById(1);
 
     }
 
