@@ -1,29 +1,48 @@
 package org.yearup.controllers;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.yearup.data.CategoryDao;
 import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class CategoriesControllerTest {
     /*
      *Mockito creates a mock(clone) for your class and gives developer
-     * more flexiblity to test.
+     * more flexibility to test.
      */
-    private CategoryDao categoryDao = Mockito.mock(CategoryDao.class);
-    private ProductDao productDao = Mockito.mock(ProductDao.class);
+    @Mock CategoryDao categoryDao;
+    @Mock ProductDao productDao;
+    @Mock DataSource dataSource;
+    @Mock Connection connection;
+    @Mock PreparedStatement ps;
+    @Mock ResultSet generatedKeys;
+
+    @InjectMocks
+    CategoriesController controller;
+    CategoryDao dao;
+
     @Test
     public void getAllCategoriesEmptyListTest(){
         //arrange
@@ -32,6 +51,7 @@ public class CategoriesControllerTest {
         List<Category> categoryList = categoryDao.getAllCategories();
         //assert
         assertThat(categoryList).isEmpty();
+        verify(categoryDao).getAllCategories();
 
     }
 
@@ -43,7 +63,7 @@ public class CategoriesControllerTest {
         //arrange
         when(categoryDao.getAllCategories()).thenReturn(expectedCategoryList);
         //act
-        List<Category> categoryList = categoryDao.getAllCategories();
+        List<Category> categoryList = controller.getAll();
         //assert
         assertThat(categoryList).isNotEmpty()
                 .isEqualTo(expectedCategoryList)
@@ -57,7 +77,7 @@ public class CategoriesControllerTest {
         //arrange
         when(categoryDao.getById(1)).thenReturn(charger);
         //act
-        Category category = categoryDao.getById(1);
+        Category category = controller.getById(1);
         //assert
         assertThat(category).isEqualTo(charger);
         verify(categoryDao).getById(1);
@@ -69,11 +89,27 @@ public class CategoriesControllerTest {
         when(categoryDao.getById(99)).thenReturn(null);
 
         // Act
-        Category result = categoryDao.getById(99);
+        Category result = controller.getById(99);
 
         // Assert
         assertThat(result).isNull();
         verify(categoryDao).getById(99);
+    }
+
+    @Test
+    public void createCategoryUsingGeneratedKeysTest() throws SQLException {
+        Category category = new Category(0, "Seafood", "sea food and the goods");
+        Category expectedCategory = new Category(101, "Seafood", "sea food and the goods");
+
+        when(categoryDao.create(category)).thenReturn(expectedCategory);
+
+        // Act
+        Category result = categoryDao.create(category);
+
+        // Assert
+        assertThat(result).isNotNull();
+        assertThat(result.getCategoryId()).isEqualTo(101);
+        verify(categoryDao).create(category);
     }
 
 }
