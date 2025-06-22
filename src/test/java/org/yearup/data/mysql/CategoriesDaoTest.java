@@ -127,4 +127,20 @@ public class CategoriesDaoTest {
         assertThat(updateResult).isTrue();
     }
 
+    @Test
+    public void deleteCategoryTest() throws SQLException {
+        // Arrange
+        int categoryId = 7;
+
+        when(dataSource.getConnection()).thenReturn(connection);
+        when(connection.prepareStatement(anyString())).thenReturn(ps);
+        when(ps.executeUpdate()).thenReturn(1);   // simulate 1 row affected
+
+        // Act
+        boolean result = mySqlCategoryDao.delete(categoryId);
+
+        // Assert
+        assertThat(result).isTrue();
+    }
+
 }
