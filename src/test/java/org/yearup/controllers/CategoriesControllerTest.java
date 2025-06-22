@@ -63,5 +63,17 @@ public class CategoriesControllerTest {
         verify(categoryDao).getById(1);
 
     }
+    @Test
+    public void getCategoryByIdReturnNullTest() {
+        // Arrange
+        when(categoryDao.getById(99)).thenReturn(null);
+
+        // Act
+        Category result = categoryDao.getById(99);
+
+        // Assert
+        assertThat(result).isNull();
+        verify(categoryDao).getById(99);
+    }
 
 }
