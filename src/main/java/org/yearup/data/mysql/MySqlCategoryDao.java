@@ -7,10 +7,7 @@ import org.yearup.data.CategoryDao;
 import org.yearup.models.Category;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +82,25 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public Category create(Category category)
     {
         // create a new category
-        return null;
+        String query = "INSERT INTO categories(category_id, name, description) VALUES(?,?,?)";
+        try(
+                Connection connection = dataSource.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
+                ){
+            ps.setInt(1,category.getCategoryId());
+            ps.setString(2,category.getName());
+            ps.setString(3, category.getDescription());
+            ps.executeUpdate();
+            try(
+                    ResultSet resultSet = ps.getGeneratedKeys()
+                    ){
+                resultSet.next();
+                category.setCategoryId(resultSet.getInt(1));
+            }
+        } catch (SQLException e){
+            System.out.println("database error " + e.getMessage());
+        }
+        return category;
     }
 
     @Override
