@@ -80,11 +80,19 @@ public class CategoriesController
         }
     }
 
-
+    @DeleteMapping("categories/{id}")
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     // add annotation to ensure that only an ADMIN can call this function
-    public void deleteCategory(@PathVariable int id)
+    public String deleteCategory(@PathVariable int id)
     {
         // delete the category by id
+        boolean success = categoryDao.delete(id);
+        if(success){
+            return  "category deleted successful";
+        }
+        else{
+                return "category not found or not deleted";
+        }
     }
 }
