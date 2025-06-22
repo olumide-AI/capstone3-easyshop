@@ -10,5 +10,5 @@ public interface CategoryDao
     Category getById(int categoryId);
     Category create(Category category);
     boolean update(int categoryId, Category category);
-    String delete(int categoryId);
+    boolean delete(int categoryId);
 }
