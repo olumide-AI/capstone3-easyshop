@@ -44,13 +44,6 @@ class MySqlProductDaoTest extends BaseDaoTestClass
         // assert
         assertEquals(expected.getPrice(), actual.getPrice(), "Because I tried to get product 1 from the database.");
     }
-//    @Test
-    public void UpdateColorFromBlackToRedTest(){
-        //arrange
-        Product product = new Product(1,"smartphone",new BigDecimal("499.99"), 1, "A powerful and feature-rich smartphone for all your communication needs.","Red", 50, false,"smartphone.jpg");
 
-        dao.update(1, product);
-
-    }
 
 }
