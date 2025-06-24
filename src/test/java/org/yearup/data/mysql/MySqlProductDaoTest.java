@@ -7,6 +7,7 @@ import org.yearup.models.Product;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -44,6 +45,5 @@ class MySqlProductDaoTest extends BaseDaoTestClass
         // assert
         assertEquals(expected.getPrice(), actual.getPrice(), "Because I tried to get product 1 from the database.");
     }
-
 
 }

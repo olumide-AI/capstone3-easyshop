@@ -57,6 +57,7 @@ public class ShoppingCartController
     public Product addProduct(){
         //Find how to get user using jwt and spring. We should be lohgged in alredy
         //our application know we logged in and how to get it from the jwt
+        return null;
     }
 
 
