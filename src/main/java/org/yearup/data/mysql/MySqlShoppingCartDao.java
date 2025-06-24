@@ -96,21 +96,22 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
     @Override
     public void delete(int userId){
         String query = "DELETE FROM shopping_cart WHERE user_id = ?";
-        try(Connection connection = dataSource.getConnection();
+        try(Connection connection = getConnection();
         PreparedStatement ps = connection.prepareStatement(query)){
             ps.setInt(1, userId);
             ps.executeUpdate();
         }
         catch (SQLException e){
-            System.out.println("Cart delete error: " + e.getMessage());
+            throw new RuntimeException("Error clearing cart", e);
         }
     }
 
     @Override
     public ShoppingCartItem getSingleItem(int userId, int productId){
         String query = "SELECT quantity FROM shopping_cart WHERE user_id = ? AND product_is = ?";
+        ShoppingCartItem shoppingCartItem = null;
         try(
-                Connection connection = dataSource.getConnection();
+                Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(query)
                 ){
             ps.setInt(1, userId);
@@ -121,9 +122,15 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
                 if(rs.next()){
                     int quantity = rs.getInt("quantity");
                     Product product = productDao.getById(productId);
-                    return new ShoppingCartItem(product, quantity);
+                    if (product == null){
+                    }
+                    else{
+                        shoppingCartItem = new ShoppingCartItem(product,quantity);
+
+                    }
                 }
             }
+
 
 
         }
@@ -133,7 +140,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
 
         }
 
-        return null;
+        return shoppingCartItem;
     }
 
     @Override
@@ -146,7 +153,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
             ps.executeUpdate();
         }
         catch(SQLException e){
-            System.out.println("Error deleteing a single item: " + e.getMessage());
+            throw new RuntimeException("Error deleting single item", e);
 
     }
     }
