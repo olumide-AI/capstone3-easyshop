@@ -55,5 +55,55 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
     }
 
     @Override
+    public void addProduct(int userId, int productId){
+        String query = "INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (?,?,1) ON DUPLICATE KEY UPDATE quantity = quantity + 1 ";
+        try(
+                Connection connection = dataSource.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query)
+                ){
+            ps.setInt(1, userId);
+            ps.setInt(2, productId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error while adding product into cart :" + e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateQuantity(int userId, int productId, int quantity){
+        String query = "UPDATE shopping_cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
+        try(
+                Connection connection = dataSource.getConnection();
+                PreparedStatement ps = connection.prepareStatement(query)
+                ){
+            ps.setInt(1, quantity);
+            ps.setInt(2, userId);
+            ps.setInt(2,productId);
+            ps.executeUpdate();
+        }
+        catch (SQLException e){
+            System.out.println("Error updating shopping cart: " +e.getMessage() );
+        }
+
+    }
+
+    @Override
+    public void delete(int userId){
+        String query = "DELETE FROM shopping_cart WHERE user_id = ?";
+        try(Connection connection = dataSource.getConnection();
+        PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        }
+        catch (SQLException e){
+            System.out.println("Cart delete error: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public ShoppingCartItem getSingleItem(int userId, int productId){
+
+    }
+
 
 }
