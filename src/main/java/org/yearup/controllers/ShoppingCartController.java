@@ -112,8 +112,8 @@ public class ShoppingCartController
             int userId = user.getId();
             shoppingCartDao.delete(userId);
         }
-        catch (Exception ex){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "error deleting the cart" + ex.getMessage());
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "error deleting the cart" , e);
         }
     }
 
