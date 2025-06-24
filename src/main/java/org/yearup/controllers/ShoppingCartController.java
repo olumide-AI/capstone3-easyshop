@@ -25,17 +25,16 @@ public class ShoppingCartController
     // a shopping cart requires
     private ShoppingCartDao shoppingCartDao;
     private UserDao userDao;
-    private ProductDao productDao;
 
     //Constructor injection
     @Autowired
-    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao){
+    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao{
         this.shoppingCartDao = shoppingCartDao;
         this.userDao = userDao;
-        this.productDao = productDao;
     }
 
     // each method in this controller requires a Principal object as a parameter
+    //Get the whole cart
     @GetMapping()
     public ShoppingCart getCart(Principal principal)
     {
@@ -60,7 +59,7 @@ public class ShoppingCartController
     // https://localhost:8080/cart/products/15 (15 is the productId to be added
     @PostMapping("/products/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addProduct(@PathVariable int id, Principal principal){
+    public ShoppingCartItem addProduct(@PathVariable int id, Principal principal){
         //Find how to get user using jwt and spring. We should be logged in already
         //our application know we logged in and how to get it from the jwt
         //And you should figure out to rturn a single cart item
@@ -69,6 +68,7 @@ public class ShoppingCartController
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
             shoppingCartDao.addProduct(userId,id);
+            return shoppingCartDao.getSingleItem(userId, id)
         }
         catch (Exception ex){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Product not found" + ex.getCause());
@@ -81,6 +81,20 @@ public class ShoppingCartController
     // add a PUT method to update an existing product in the cart - the url should be
     // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
+    @PutMapping("/products/{id")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateQuantity(@PathVariable int id, @RequestBody ShoppingCartItem body, Principal principal){
+        try{
+            String userName = principal.getName();
+            User user = userDao.getByUserName(userName);
+            int userId = user.getId();
+            shoppingCartDao.updateQuantity(userId, id, body.getQuantity());
+
+        }
+        catch (Exception ex){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "error updating the cart" + ex.getMessage());
+        }
+    }
 
 
     // add a DELETE method to clear all products from the current users cart
