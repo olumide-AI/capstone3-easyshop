@@ -67,11 +67,15 @@ public class ShoppingCartController
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
-            shoppingCartDao.addProduct(userId,id);
-            return shoppingCartDao.getSingleItem(userId, id);
+            shoppingCartDao.addProduct(userId, id);
+            ShoppingCartItem shoppingCartItem = shoppingCartDao.getSingleItem(userId, id);
+            if(shoppingCartItem == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart");
+            }
+            return shoppingCartItem;
         }
-        catch (Exception ex){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Product not found" + ex.getCause());
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Product not added", e);
         }
 
     }
