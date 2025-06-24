@@ -116,5 +116,12 @@ public class ShoppingCartController
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "error deleting the cart" , e);
         }
     }
+    //Delete single cart item
+    @DeleteMapping("/products/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteItem(@PathVariable int id, Principal principal) {
+        int userId = userDao.getByUserName(principal.getName()).getId();
+        shoppingCartDao.deleteItem(userId, id);
+    }
 
 }
