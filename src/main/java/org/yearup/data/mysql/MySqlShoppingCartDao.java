@@ -33,7 +33,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         String query = "SELECT product_id, quantity FROM shopping_cart WHERE user_id = ?";
         ShoppingCart shoppingCart = new ShoppingCart();
         try (
-                Connection connection = dataSource.getConnection();
+                Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, userId);
             try (
@@ -43,13 +43,18 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
                     int productId = resultSet.getInt("product_id");
                     int quantity = resultSet.getInt("quantity");
                     //How do i guard againt null pointer errors
-                    shoppingCart.add(new ShoppingCartItem(productDao.getById(productId), quantity));
+                    Product product = productDao.getById(productId);
+                    if (product == null){
+                        continue;
+
+                    }
+                    shoppingCart.add(new ShoppingCartItem(product, quantity));
                 }
             }
 
         }
         catch (SQLException e){
-            System.out.println("Error in the MYSQL ShoppingCartDao: " + e.getMessage());
+            throw new RuntimeException("Error fetching cart", e);
         }
         return shoppingCart;
 

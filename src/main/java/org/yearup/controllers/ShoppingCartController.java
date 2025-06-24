@@ -17,7 +17,7 @@ import java.security.Principal;
 
 // convert this class to a REST controller
 @RestController
-// only logged in users should have access to these actions
+// only logged users should have access to these actions
 @PreAuthorize("hasRole('ROLE_USER')")
 @RequestMapping("/cart")
 public class ShoppingCartController
@@ -28,7 +28,7 @@ public class ShoppingCartController
 
     //Constructor injection
     @Autowired
-    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao{
+    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao){
         this.shoppingCartDao = shoppingCartDao;
         this.userDao = userDao;
     }
@@ -40,7 +40,7 @@ public class ShoppingCartController
     {
         try
         {
-            // get the currently logged in username
+            // get the currently logged username
             String userName = principal.getName();
             // find database user by userId
             User user = userDao.getByUserName(userName);
@@ -68,7 +68,7 @@ public class ShoppingCartController
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
             shoppingCartDao.addProduct(userId,id);
-            return shoppingCartDao.getSingleItem(userId, id)
+            return shoppingCartDao.getSingleItem(userId, id);
         }
         catch (Exception ex){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Product not found" + ex.getCause());
@@ -81,7 +81,7 @@ public class ShoppingCartController
     // add a PUT method to update an existing product in the cart - the url should be
     // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
     // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
-    @PutMapping("/products/{id")
+    @PutMapping("/products/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateQuantity(@PathVariable int id, @RequestBody ShoppingCartItem body, Principal principal){
         try{
