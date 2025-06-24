@@ -88,15 +88,24 @@ public class ShoppingCartController
     @PutMapping("/products/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateQuantity(@PathVariable int id, @RequestBody ShoppingCartItem body, Principal principal){
-        try{
+            //Check JSON
+            if (body == null || body.getQuantity() <= 0){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quantity must be positive whole number");
+            }
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
-            shoppingCartDao.updateQuantity(userId, id, body.getQuantity());
 
-        }
-        catch (Exception ex){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "error updating the cart" + ex.getMessage());
+            ShoppingCartItem shoppingCartItem = shoppingCartDao.getSingleItem(userId, id);
+            if (shoppingCartItem == null){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cart has no product " + id);
+            }
+            try{
+                shoppingCartDao.updateQuantity(userId,id, body.getQuantity());
+            }
+
+        catch (RuntimeException e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Database error updating the cart" + e);
         }
     }
 
