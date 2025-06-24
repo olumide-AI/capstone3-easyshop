@@ -1,17 +1,16 @@
 package org.yearup.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.yearup.data.ProductDao;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.data.UserDao;
 import org.yearup.models.Product;
 import org.yearup.models.ShoppingCart;
+import org.yearup.models.ShoppingCartItem;
 import org.yearup.models.User;
 
 import java.security.Principal;
@@ -28,7 +27,13 @@ public class ShoppingCartController
     private UserDao userDao;
     private ProductDao productDao;
 
-
+    //Constructor injection
+    @Autowired
+    public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao, ProductDao productDao){
+        this.shoppingCartDao = shoppingCartDao;
+        this.userDao = userDao;
+        this.productDao = productDao;
+    }
 
     // each method in this controller requires a Principal object as a parameter
     @GetMapping()
@@ -43,21 +48,32 @@ public class ShoppingCartController
             int userId = user.getId();
 
             // use the shoppingcartDao to get all items in the cart and return the cart
-            return null;
+            return shoppingCartDao.getByUserId(userId);
         }
-        catch(Exception e)
+        catch(Exception ex)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not get the cart" + ex.getCause());
         }
     }
 
     // add a POST method to add a product to the cart - the url should be
     // https://localhost:8080/cart/products/15 (15 is the productId to be added
-    @PostMapping("products/{id}")
-    public Product addProduct(){
-        //Find how to get user using jwt and spring. We should be lohgged in alredy
+    @PostMapping("/products/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addProduct(@PathVariable int id, Principal principal){
+        //Find how to get user using jwt and spring. We should be logged in already
         //our application know we logged in and how to get it from the jwt
-        return null;
+        //And you should figure out to rturn a single cart item
+        try{
+            String userName = principal.getName();
+            User user = userDao.getByUserName(userName);
+            int userId = user.getId();
+            shoppingCartDao.addProduct(userId,id);
+        }
+        catch (Exception ex){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Product not found" + ex.getCause());
+        }
+
     }
 
 

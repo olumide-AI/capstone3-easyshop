@@ -39,6 +39,7 @@ public class CategoriesController
     }
 
     // add the appropriate annotation for a get action
+    //Throw the exceptions
     @GetMapping("/{id}")
     public Category getById(@PathVariable int id)
     {
