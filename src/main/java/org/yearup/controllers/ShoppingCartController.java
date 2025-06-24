@@ -20,7 +20,7 @@ import java.security.Principal;
 @RestController
 // only logged in users should have access to these actions
 @PreAuthorize("hasRole('ROLE_USER')")
-@RequestMapping("cart")
+@RequestMapping("/cart")
 public class ShoppingCartController
 {
     // a shopping cart requires
