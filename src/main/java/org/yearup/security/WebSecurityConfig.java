@@ -1,5 +1,8 @@
 package org.yearup.security;
 
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.yearup.security.jwt.JWTConfigurer;
 import org.yearup.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
@@ -43,9 +46,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * Configure paths and requests that should be ignored by Spring Security
      * @param web
      */
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-    }
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+//    }
 
     /**
      * Configure security settings
@@ -56,6 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 // we don't need CSRF because our token is invulnerable
+                .cors()
+                .and()
                 .csrf().disable()
 
                 .exceptionHandling()
@@ -68,11 +73,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/cart/**").hasRole("USER")
+                .anyRequest().authenticated()
+                .and()
                 .apply(securityConfigurerAdapter());
     }
 
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(tokenProvider);
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.addAllowedOriginPattern("*");           // or "http://localhost:5173"
+        cors.addAllowedMethod("*");                  // GET,POST,PUT,DELETE,OPTIONS
+        cors.addAllowedHeader("*");                  // Authorization, Content-Type
+        cors.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", cors);
+        return source;
     }
 }
 

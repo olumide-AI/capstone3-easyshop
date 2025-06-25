@@ -108,7 +108,7 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
 
     @Override
     public ShoppingCartItem getSingleItem(int userId, int productId){
-        String query = "SELECT quantity FROM shopping_cart WHERE user_id = ? AND product_is = ?";
+        String query = "SELECT quantity FROM shopping_cart WHERE user_id = ? AND product_id = ?";
         ShoppingCartItem shoppingCartItem = null;
         try(
                 Connection connection = getConnection();
