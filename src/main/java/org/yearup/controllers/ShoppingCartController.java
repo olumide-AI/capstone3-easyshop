@@ -59,7 +59,12 @@ public class ShoppingCartController
     // https://localhost:8080/cart/products/15 (15 is the productId to be added
     @PostMapping("/products/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingCartItem addProduct(@PathVariable int id, Principal principal){
+    public ShoppingCartItem addProduct(@PathVariable int id, @RequestParam(defaultValue = "1") int quantity, Principal principal){
+        System.out.println("cpntroller qty = " + quantity);
+        if (quantity <= 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Quantity must be positive");
+        }
         //Find how to get user using jwt and spring. We should be logged in already
         //our application know we logged in and how to get it from the jwt
         //And you should figure out to rturn a single cart item
@@ -67,7 +72,7 @@ public class ShoppingCartController
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
             int userId = user.getId();
-            shoppingCartDao.addProduct(userId, id);
+            shoppingCartDao.addProduct(userId, id, quantity);
             ShoppingCartItem shoppingCartItem = shoppingCartDao.getSingleItem(userId, id);
             if(shoppingCartItem == null){
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found in cart");

@@ -7,7 +7,7 @@ public interface ShoppingCartDao
 {   //used to get cart for the user
     ShoppingCart getByUserId(int userId);
     // add product
-    void addProduct (int UserId, int productId);
+    void addProduct (int UserId, int productId, int qty);
     //increase quantity when we put item in the cart
     void updateQuantity(int userId, int productId, int Quantity);
     // delete the whole cart
