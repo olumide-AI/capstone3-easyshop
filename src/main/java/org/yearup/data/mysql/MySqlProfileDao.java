@@ -90,6 +90,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
             ps.setString(6, profile.getCity());
             ps.setString(7, profile.getState());
             ps.setString(8, profile.getZip());
+            ps.setInt(9, profile.getUserId());
 
             int affectedRows = ps.executeUpdate();
             return affectedRows > 0;
