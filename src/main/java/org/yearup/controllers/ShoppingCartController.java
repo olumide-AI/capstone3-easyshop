@@ -59,8 +59,11 @@ public class ShoppingCartController
     // https://localhost:8080/cart/products/15 (15 is the productId to be added
     @PostMapping("/products/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ShoppingCartItem addProduct(@PathVariable int id, @RequestParam(defaultValue = "1") int quantity, Principal principal){
-        System.out.println("cpntroller qty = " + quantity);
+    public ShoppingCartItem addProduct(@PathVariable int id,
+                                       @RequestParam(name = "quantity", defaultValue = "1") int quantityParam,
+                                       @RequestParam(name = "qty", required = false) Integer qtyAlias, Principal principal){
+        int quantity = (qtyAlias != null) ? qtyAlias : quantityParam;
+        //System.out.println("controller qty = " + quantity);
         if (quantity <= 0) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Quantity must be positive");
