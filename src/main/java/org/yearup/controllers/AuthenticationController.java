@@ -62,7 +62,7 @@ public class AuthenticationController {
         }
         catch(Exception ex)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.", ex);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can't complete user login", ex);
         }
     }
 
@@ -88,9 +88,9 @@ public class AuthenticationController {
 
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Registration error for new user.", ex);
         }
     }
 
