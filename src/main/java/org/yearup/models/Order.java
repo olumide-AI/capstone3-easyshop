@@ -120,7 +120,11 @@ public class Order {
     public BigDecimal getTotal(){
         BigDecimal total = BigDecimal.ZERO;
         for(OrderLineItem orderLineItem: orderLineItems){
-            BigDecimal line = orderLineItem
+            BigDecimal line = orderLineItem.getSalesPrice()
+                    .multiply(BigDecimal.valueOf(orderLineItem.getQuantity()));
+            line = line.subtract(orderLineItem.getDiscount());
+            total = total.add(line);
         }
+        return total.add(shippingAmount);
     }
 }
