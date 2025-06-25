@@ -7,9 +7,24 @@ public class OrderLineItem {
     private int productId;
     private BigDecimal salesPrice;
     private int quantity;
-    private BigDecimal discount;
+    private BigDecimal discount = BigDecimal.ZERO;
 
     public OrderLineItem() {
+    }
+
+    public OrderLineItem(int productId, BigDecimal salesPrice, int quantity, BigDecimal discount) {
+        this.productId = productId;
+        this.salesPrice = salesPrice;
+        this.quantity = quantity;
+        this.discount = discount;
+    }
+
+    public OrderLineItem(int orderLineItemId, int productId, int quantity, BigDecimal salesPrice, BigDecimal discount) {
+        this.orderLineItemId = orderLineItemId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.salesPrice = salesPrice;
+        this.discount = discount;
     }
 
     public int getOrderLineItemId() {
@@ -49,6 +64,12 @@ public class OrderLineItem {
     }
 
     public void setDiscount(BigDecimal discount) {
-        this.discount = discount;
+        if (discount == null){
+            this.discount = BigDecimal.ZERO;
+        }
+        else {
+            this.discount = discount;
+        }
+
     }
 }
