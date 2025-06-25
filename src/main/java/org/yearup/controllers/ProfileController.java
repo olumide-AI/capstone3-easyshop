@@ -54,7 +54,6 @@ public class ProfileController {
     }
 
     @PutMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateProfile(@RequestBody Profile profile, Principal principal){
         if (profile.getFirstName() == null || profile.getFirstName().isBlank()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "First name is required");
