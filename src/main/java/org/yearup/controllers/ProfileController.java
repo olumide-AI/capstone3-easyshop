@@ -63,10 +63,10 @@ public class ProfileController {
         User user = userDao.getByUserName(userName);
         int userId = user.getId();
 
-        profileDao.updateProfile(userId, profile);
-//        if(! success){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile UPDATE not found");
-//        }
+        boolean success = profileDao.updateProfile(userId, profile);
+        if(! success){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile UPDATE not found");
+        }
 
     }
 }
