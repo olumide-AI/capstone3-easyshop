@@ -49,9 +49,9 @@ public class ShoppingCartController
             // use the shoppingcartDao to get all items in the cart and return the cart
             return shoppingCartDao.getByUserId(userId);
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not get the cart" + ex.getCause());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not get the cart",  e);
         }
     }
 
