@@ -1,12 +1,14 @@
 package org.yearup.data.mysql;
 
 import org.apache.ibatis.jdbc.SQL;
+import org.springframework.stereotype.Component;
 import org.yearup.data.OrderDao;
 import org.yearup.models.Order;
 
 import javax.sql.DataSource;
 import java.sql.*;
 
+@Component
 public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
 
     public MySqlOrderDao(DataSource dataSource) {
