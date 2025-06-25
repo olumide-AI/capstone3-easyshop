@@ -21,6 +21,13 @@ public class User {
       this.activated = true;
    }
 
+   public User(String username, String password, String authorities) {
+      this.username = username;
+      this.password = password;
+      this.activated = true;
+      if(authorities != null) this.setAuthorities(authorities);
+   }
+
    public User(int id, String username, String password, String authorities) {
       this.id = id;
       this.username = username;
@@ -28,6 +35,7 @@ public class User {
       if(authorities != null) this.setAuthorities(authorities);
       this.activated = true;
    }
+
 
    public int getId() {
       return id;

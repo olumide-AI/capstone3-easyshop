@@ -77,7 +77,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
                 "   , city = ? " +
                 "   , state = ? " +
                 "   , zip = ? " +
-                " WHERE user_id = ?;";
+                " WHERE user_id = ?";
         try(
                 Connection connection = getConnection()
                 ){

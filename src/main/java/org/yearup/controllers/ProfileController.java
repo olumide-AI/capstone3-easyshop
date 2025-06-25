@@ -13,7 +13,6 @@ import org.yearup.models.User;
 import java.security.Principal;
 
 @RestController
-@PreAuthorize("hasRole('ROLE_USER')")
 @RequestMapping("/profile")
 @CrossOrigin
 public class ProfileController {
@@ -53,20 +52,21 @@ public class ProfileController {
 
     }
 
-    @PutMapping
+    @PutMapping()
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void updateProfile(@RequestBody Profile profile, Principal principal){
-        if (profile.getFirstName() == null || profile.getFirstName().isBlank()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "First name is required");
-        }
+//        if (profile.getFirstName() == null || profile.getFirstName().isBlank()){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "First name is required");
+//        }
         String userName = principal.getName();
         // find database user by userId
         User user = userDao.getByUserName(userName);
         int userId = user.getId();
 
-        boolean success = profileDao.updateProfile(userId, profile);
-        if(! success){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile not found");
-        }
+        profileDao.updateProfile(userId, profile);
+//        if(! success){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Profile UPDATE not found");
+//        }
 
     }
 }
