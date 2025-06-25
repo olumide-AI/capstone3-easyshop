@@ -67,7 +67,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
     }
 
     @Override
-    public Profile updateProfile(int userId, Profile profile) {
+    public boolean updateProfile(int userId, Profile profile) {
         final String query = "UPDATE profiles" +
                 " SET first_name = ? " +
                 "   , last_name = ? " +
@@ -97,7 +97,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
         catch (SQLException e){
             throw new RuntimeException("Error when updating profile " + userId, e);
         }
-        return profile;
+
     }
 
     //Helper map row function
