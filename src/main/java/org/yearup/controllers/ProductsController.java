@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.yearup.exception.CustomDataException;
 import org.yearup.models.Product;
 import org.yearup.data.ProductDao;
 
@@ -36,9 +37,9 @@ public class ProductsController
         {
             return productDao.search(categoryId, minPrice, maxPrice, color);
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new CustomDataException("Error loading search product", e);
         }
     }
 
