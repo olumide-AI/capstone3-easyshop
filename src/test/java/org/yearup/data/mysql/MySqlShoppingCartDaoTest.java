@@ -70,5 +70,18 @@ public class MySqlShoppingCartDaoTest {
 
     }
 
+    @Test
+    void updateQuantity() throws Exception {
+        when(connection.prepareStatement(anyString())).thenReturn(ps);
+        when(ps.executeUpdate()).thenReturn(1);
+
+        cartDao.updateQuantity(99, 42, 5);
+
+        verify(ps).setInt(1, 5);
+        verify(ps).setInt(2, 99);
+        verify(ps).setInt(3, 42);
+        verify(ps).executeUpdate();
+    }
+
 
 }
