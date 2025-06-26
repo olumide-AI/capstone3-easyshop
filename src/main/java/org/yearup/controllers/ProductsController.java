@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.yearup.exception.CustomDataException;
+import org.yearup.exception.CustomResourceNotFoundException;
 import org.yearup.models.Product;
 import org.yearup.data.ProductDao;
 
@@ -52,13 +53,14 @@ public class ProductsController
             var product = productDao.getById(id);
 
             if(product == null)
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                throw new CustomResourceNotFoundException("Product " + id + " not found");
+
 
             return product;
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new CustomDataException("Error fetching product", e);
         }
     }
 
@@ -70,9 +72,9 @@ public class ProductsController
         {
             return productDao.create(product);
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new CustomResourceNotFoundException("Product not found");
         }
     }
 
@@ -84,9 +86,9 @@ public class ProductsController
         {
             productDao.update(id, product);
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new CustomDataException("Error updating product " + id, e);
         }
     }
 
@@ -99,13 +101,13 @@ public class ProductsController
             var product = productDao.getById(id);
 
             if(product == null)
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+                throw new CustomResourceNotFoundException("Product " + id + " not found");
 
             productDao.delete(id);
         }
-        catch(Exception ex)
+        catch(Exception e)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new CustomDataException("Error creating product", e);
         }
     }
 }
