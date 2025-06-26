@@ -33,29 +33,36 @@ public class OrderController {
         this.userDao = userDao;
     }
 
-//    @PostMapping()
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Order checkout(Principal principal){
-//        // get the currently logged username
-//        String userName = principal.getName();
-//        // find database user by userId
-//        User user = userDao.getByUserName(userName);
-//        int userId = user.getId();
-//
-//        ShoppingCart shoppingCart = cartDao.getByUserId(userId);
-//
-//        if(shoppingCart.getItems().isEmpty()){
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cart is empty");
-//        }
-//
-//        Profile profile = profileDao.getProfileByUserId(userId);
-//        Order order = new Order(userId, LocalDateTime.now(), profile.getAddress(), profile.getCity(), profile.getState(), profile.getZip());
-//        order = orderDao.create(order);
-//
-//        for(ShoppingCartItem item: shoppingCart.getItems()){
-//            OrderLineItem orderLineItem = new OrderLineItem(
-//            )
-//        }
-//
-//    }
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order checkout(Principal principal){
+        // get the currently logged username
+        String userName = principal.getName();
+        // find database user by userId
+        User user = userDao.getByUserName(userName);
+        int userId = user.getId();
+
+        ShoppingCart shoppingCart = cartDao.getByUserId(userId);
+
+        if(shoppingCart.getItems().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cart is empty");
+        }
+
+        Profile profile = profileDao.getProfileByUserId(userId);
+        Order order = new Order(userId, LocalDateTime.now(), profile.getAddress(), profile.getCity(), profile.getState(), profile.getZip());
+        order = orderDao.create(order);
+
+        for(ShoppingCartItem item: shoppingCart.getItems().values()){
+            OrderLineItem orderLineItem = new OrderLineItem(
+                    item.getProduct().getProductId(),
+                    item.getProduct().getPrice(),
+                    item.getQuantity());
+            orderLineItemDao.create(order.getOrderId(), orderLineItem);
+            order.addLineItem(orderLineItem);
+
+        }
+        cartDao.delete(userId);
+        return order;
+
+    }
 }

@@ -9,7 +9,7 @@ public class OrderLineItem {
     private int quantity;
     private BigDecimal discount = BigDecimal.ZERO;
 
-    public OrderLineItem() {
+    public OrderLineItem(int productId, BigDecimal price, int quantity) {
     }
 
     public OrderLineItem(int productId, BigDecimal salesPrice, int quantity, BigDecimal discount) {
@@ -17,6 +17,12 @@ public class OrderLineItem {
         this.salesPrice = salesPrice;
         this.quantity = quantity;
         this.discount = discount;
+    }
+
+    public OrderLineItem(int productId, int quantity, BigDecimal salesPrice) {
+        this.productId = productId;
+        this.quantity = quantity;
+        this.salesPrice = salesPrice;
     }
 
     public OrderLineItem(int orderLineItemId, int productId, int quantity, BigDecimal salesPrice, BigDecimal discount) {
