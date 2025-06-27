@@ -27,7 +27,13 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         this.productDao = productDao;
         this.dataSource = dataSource;
     }
-
+    /**
+     * Retrieves the entire shopping cart for the specified user.
+     * Each cart item includes product details and quantity.
+     * @param userId the ID of the user.
+     * @return a ShoppingCart object containing all items.
+     * @throws RuntimeException on database access errors.
+     */
     @Override
     public ShoppingCart getByUserId(int userId) {
         String query = "SELECT product_id, quantity FROM shopping_cart WHERE user_id = ?";
@@ -59,7 +65,13 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return shoppingCart;
 
     }
-
+    /**
+     * Adds a product to the user's cart. If the product already exists in the cart,
+     * its quantity is incremented atomically.
+     * @param userId the ID of the user.
+     * @param productId the ID of the product.
+     * @param qty the quantity to add.
+     */
     @Override
     public void addProduct(int userId, int productId, int qty){
         //System.out.println("dao qty = " + qty);
@@ -81,6 +93,12 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         }
     }
 
+    /**
+     * Updates the quantity of a specific product in the user's cart.
+     * @param userId the ID of the user.
+     * @param productId the ID of the product.
+     * @param quantity the new quantity to set.
+     */
     @Override
     public void updateQuantity(int userId, int productId, int quantity){
         String query = "UPDATE shopping_cart SET quantity = ? WHERE user_id = ? AND product_id = ?";
@@ -99,6 +117,10 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
 
     }
 
+    /**
+     * Deletes all items in the user's shopping cart.
+     * @param userId the ID of the user.
+     */
     @Override
     public void delete(int userId){
         String query = "DELETE FROM shopping_cart WHERE user_id = ?";
@@ -112,6 +134,12 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         }
     }
 
+    /**
+     * Retrieves a single cart item (product and quantity) for the user.
+     * @param userId the ID of the user.
+     * @param productId the ID of the product.
+     * @return a ShoppingCartItem, or null if not found or product is missing.
+     */
     @Override
     public ShoppingCartItem getSingleItem(int userId, int productId){
         String query = "SELECT quantity FROM shopping_cart WHERE user_id = ? AND product_id = ?";
@@ -149,6 +177,11 @@ public class MySqlShoppingCartDao extends MySqlDaoBase implements ShoppingCartDa
         return shoppingCartItem;
     }
 
+    /**
+     * Deletes a specific item (product) from the user's shopping cart.
+     * @param userId the ID of the user.
+     * @param productId the ID of the product to delete.
+     */
     @Override
     public void deleteItem(int userId, int productId){
         String sql = "DELETE FROM shopping_cart WHERE user_id=? AND product_id=?";
