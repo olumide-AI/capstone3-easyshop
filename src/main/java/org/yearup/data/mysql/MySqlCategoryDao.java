@@ -10,7 +10,10 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * MySqlCategoryDao is the MySQL-specific implementation of the CategoryDao interface.
+ * It provides CRUD operations for Category entities using JDBC.
+ */
 @Component
 public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
 {
@@ -22,7 +25,10 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         super(dataSource);
         this.dataSource = dataSource;
     }
-
+    /**
+     * Retrieves all categories from the database.
+     * @return a list of all categories.
+     */
     @Override
     public List<Category> getAllCategories()
     {
@@ -45,6 +51,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         return categories;
     }
 
+    /**
+     * Retrieves a category by its unique ID.
+     * @param categoryId the ID of the category.
+     * @return the Category object, or null if not found.
+     */
     @Override
     public Category getById(int categoryId)
     {
@@ -74,6 +85,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         return category;
     }
 
+    /**
+     * Creates a new category into the database.
+     * @param category the Category to create.
+     * @return the created Category with its generated ID.
+     */
     @Override
     public Category create(Category category)
     {
@@ -99,6 +115,12 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         return category;
     }
 
+    /**
+     * Updates the name of an existing category by ID.
+     * @param categoryId the ID of the category to update.
+     * @param category the updated Category data.
+     * @return true if the update was successful, false otherwise.
+     */
     @Override
     public boolean update(int categoryId, Category category)
     {
@@ -120,6 +142,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         }
     }
 
+    /**
+     * Deletes a category by its ID.
+     * @param categoryId the ID of the category to delete.
+     * @return true if the deletion was successful, false otherwise.
+     */
     @Override
     public boolean delete(int categoryId)
     {
@@ -139,6 +166,12 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         }
     }
 
+    /**
+     * Maps a single row from the ResultSet to a Category object.
+     * @param row the current row of the ResultSet.
+     * @return the mapped Category object.
+     * @throws SQLException if column access fails.
+     */
     private Category mapRow(ResultSet row) throws SQLException
     {
         int categoryId = row.getInt("category_id");
