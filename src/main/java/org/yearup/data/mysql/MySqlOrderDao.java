@@ -15,6 +15,13 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
         super(dataSource);
     }
 
+    /**
+     * Inserts a new order into the orders table.
+     * Automatically sets the current date using NOW().
+     * @param order the Order object to insert.
+     * @return the Order object with the generated order ID populated.
+     * @throws RuntimeException if a database error occurs.
+     */
     @Override
     public Order create(Order order){
         final String query = "INSERT INTO orders (user_id, date, address, city, state, zip, shipping_amount) VALUES (?, NOW(), ?,?,?,?,?";
