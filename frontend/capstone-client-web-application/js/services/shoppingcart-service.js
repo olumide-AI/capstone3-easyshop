@@ -44,24 +44,22 @@ class ShoppingCartService {
       });
   }
 
-   checkout() {
+  checkout() {
     const url = `${config.baseUrl}/checkout`;
     const headers = userService.getHeaders();
+
     axios.post(url, {}, { headers })
       .then(response => {
--       const order = response.data;
--       window.location.href = `/order-confirmation.html?orderId=${order.orderId}`;
-+       const order = response.data;
-+       // save the full order for the next page
-+       sessionStorage.setItem('lastOrder', JSON.stringify(order));
-+       // redirect with the ID in the query string
-+       window.location.href = `/order-confirmation.html?orderId=${order.orderId}`;
+        const order = response.data;
+        // stash full order so confirmation page can show details
+        sessionStorage.setItem('lastOrder', JSON.stringify(order));
+        // redirect with the ID in query string
+        window.location.href = `/order-confirmation.html?orderId=${order.orderId}`;
       })
       .catch(() => {
         templateBuilder.append("error", { error: "Checkout failed." }, "errors");
       });
   }
-
 
   // updates the little cart badge in your nav
   updateCartDisplay() {
