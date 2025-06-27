@@ -1,4 +1,4 @@
-[# EasyShop
+# EasyShop
 
 A Java-based e-commerce application for managing products, customers, and orders with a focus on simplicity and scalability.
 
