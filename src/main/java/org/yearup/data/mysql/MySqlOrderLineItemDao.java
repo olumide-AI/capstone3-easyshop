@@ -16,6 +16,12 @@ public class MySqlOrderLineItemDao extends MySqlDaoBase implements OrderLineItem
         super(dataSource);
     }
 
+    /**
+     * Inserts a new order line item associated with the given order ID.
+     * @param orderId the ID of the order to associate this line item with.
+     * @param orderLineItem the OrderLineItem object containing product and pricing details.
+     * @throws RuntimeException if a database error occurs.
+     */
     @Override
     public void create(int orderId, OrderLineItem orderLineItem){
         String query = "INSERT INTO order_line_items (order_id, product_id, sales_price, quantity, discount) VALUES (?,?,?,?,?)";

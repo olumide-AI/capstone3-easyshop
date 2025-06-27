@@ -20,6 +20,12 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         super(dataSource);
     }
 
+    //@Paulo Franklins Cunha  Assisted with debugging and implementing this Method
+    /**
+     * Searches for products by optional filters: category, price range, and color.
+     * Null filters are ignored, allowing flexible search criteria.
+     * @return a list of products matching the search criteria.
+     */
     @Override
     public List<Product> search(Integer categoryId, BigDecimal minPrice, BigDecimal maxPrice, String color) {
         List<Product> products = new ArrayList<>();
@@ -60,6 +66,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         return products;
     }
 
+    /**
+     * Lists all products belonging to a specific category.
+     * @param categoryId the ID of the category to filter by.
+     * @return a list of products in the given category.
+     */
     @Override
     public List<Product> listByCategoryId(int categoryId)
     {
@@ -89,7 +100,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         return products;
     }
 
-
+    /**
+     * Retrieves a product by its unique product ID.
+     * @param productId the ID of the product.
+     * @return the Product if found, otherwise null.
+     */
     @Override
     public Product getById(int productId)
     {
@@ -113,6 +128,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         return null;
     }
 
+    /**
+     * Inserts a new product into the database and retrieves it.
+     * @param product the Product object to insert.
+     * @return the inserted Product with the generated ID populated.
+     */
     @Override
     public Product create(Product product)
     {
@@ -154,6 +174,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         return null;
     }
 
+    /**
+     * Updates an existing product with new details.
+     * @param productId the ID of the product to update.
+     * @param product the updated Product object.
+     */
     @Override
     public void update(int productId, Product product)
     {
@@ -190,6 +215,11 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         }
     }
 
+
+    /**
+     * Deletes a product from the database by its ID.
+     * @param productId the ID of the product to delete.
+     */
     @Override
     public void delete(int productId)
     {
@@ -210,6 +240,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         }
     }
 
+    //Helper Function
     protected static Product mapRow(ResultSet row) throws SQLException
     {
         int productId = row.getInt("product_id");
