@@ -1,34 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Presentation</title>
-    <link rel="stylesheet" href="../css/lib/bootstrap.css">
-    <link rel="stylesheet" href="presentation.css">
-</head>
-<body>
+<!-- templates/presentation.html -->
 <div class="container py-5">
-    <h1 class="text-center">🎤 My Presentation</h1>
-    <div id="presentation-container" class="my-4"></div>
-    <div class="text-center">
-        <button id="btn-prev" class="btn btn-outline-secondary">Previous</button>
-        <button id="btn-next" class="btn btn-primary">Next</button>
-    </div>
+  <h1 class="text-center mb-4">🎤 EasyShop Presentation</h1>
+  <div id="presentation-container" class="mb-4"></div>
+  <div class="text-center">
+    <button id="btn-prev" class="btn btn-outline-secondary me-2">Prev</button>
+    <button id="btn-next" class="btn btn-primary">Next</button>
+  </div>
 </div>
 
-<!-- Mustache template -->
 <script id="slide-template" type="x-tmpl-mustache">
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <h2 class="card-title text-center">{{ title }}</h2>
-            <p class="card-text">{{{ content }}}</p>
-        </div>
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title text-center">{{ title }}</h2>
+      <div class="card-text">{{{ content }}}</div>
     </div>
+  </div>
 </script>
 
-<script src="../js/lib/jquery.min.js"></script>
-<script src="../js/lib/mustache.js"></script>
-<script src="presentation-service.js"></script>
-<script src="presentation.js"></script>
-</body>
-</html>
+<script src="../js/presentation.js"></script>

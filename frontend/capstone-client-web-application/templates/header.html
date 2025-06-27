@@ -1,11 +1,11 @@
 
 {{#loggedin}}
 <div id="links">
-    <img src="/images/logo.png" alt="eashshop logo">
+    <img src="./images/logo.png" alt="eashshop logo">
     <a href="#" onclick="loadHome()">Home</a>
     <a href="#" onclick="editProfile()">Profile</a>
     <a href="#" onclick="showCart()">View Cart</a>
-    <a href="templates/presentation.html" >Presentation</a>
+    <a href="#" onclick="templateBuilder.build('presentation-scroll', {}, 'main'); return false;">Presentation</a>
 </div>
 
 <div>
@@ -18,7 +18,7 @@
 {{/loggedin}}
 {{#loggedout}}
 <div id="links">
-    <img src="/images/logo.png" alt="easyshop logo">
+    <img src="/images/logo.png" alt="eashshop logo">
     <a href="#" onclick="loadHome()">Home</a>
 </div>
 

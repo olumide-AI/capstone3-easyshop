@@ -1,13 +1,21 @@
-body {
-    background-color: #f0f8ff;
+section {
+  padding: 60px 0;
+  border-bottom: 1px solid #e9ecef;
 }
 
-.card {
-    max-width: 700px;
-    margin: auto;
-    background: white;
+section:last-of-type {
+  border-bottom: none;
 }
 
-h1 {
-    color: #333;
+h2 {
+  font-weight: 700;
+  color: #343a40;
+}
+
+pre code {
+  font-size: 1.1rem;
+}
+
+.lead {
+  font-size: 1.3rem;
 }
