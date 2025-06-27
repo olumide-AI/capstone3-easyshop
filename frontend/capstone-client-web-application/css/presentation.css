@@ -1,21 +1,54 @@
-section {
-  padding: 60px 0;
-  border-bottom: 1px solid #e9ecef;
+/* Override main's grid only when presentation is active */
+main.presentation-mode {
+  display: block !important;        /* Disable grid layout */
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
 }
 
-section:last-of-type {
-  border-bottom: none;
+/* Presentation Sections */
+.presentation section {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-h2 {
-  font-weight: 700;
-  color: #343a40;
+.hero {
+  background: linear-gradient(135deg, #1d3557, #457b9d);
+}
+
+.section-light {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.section-dark {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hero h1, .hero h2, .hero p {
+  color: #fff;
 }
 
 pre code {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  word-break: break-word;
 }
 
-.lead {
-  font-size: 1.3rem;
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+ul li {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }

@@ -28,13 +28,15 @@ function showImageDetailForm(product, imageUrl)
     templateBuilder.build('image-detail',imageDetail,'login')
 }
 
-function loadHome()
-{
-    templateBuilder.build('home',{},'main')
+function loadHome() {
+  const main = document.getElementById("main");
+  main.classList.remove("presentation-mode");
 
-    productService.search();
-    categoryService.getAllCategories(loadCategories);
+  templateBuilder.build('home', {}, 'main');
+  productService.search();
+  categoryService.getAllCategories(loadCategories);
 }
+
 
 function editProfile()
 {
@@ -121,6 +123,14 @@ function closeError(control)
         control.click();
     },3000);
 }
+
+function showPresentation() {
+  templateBuilder.build('presentation-scroll', {}, 'main', () => {
+    const main = document.getElementById("main");
+    main.classList.add("presentation-mode");
+  });
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
