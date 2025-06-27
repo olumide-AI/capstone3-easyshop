@@ -94,7 +94,7 @@ public class MySqlProfileDao extends MySqlDaoBase implements ProfileDao
 
             int affectedRows = ps.executeUpdate();
             System.out.println("UPDATE profiles → rows affected = " + affectedRows);
-            return affectedRows == 1;
+            return affectedRows > 0;
         }
         catch (SQLException e){
             throw new RuntimeException("Error when updating profile " + userId, e);

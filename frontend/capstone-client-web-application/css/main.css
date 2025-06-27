@@ -40,30 +40,6 @@ header .cart #cart-items {
   padding-left: 5px;
 }
 
-body {
-  background: linear-gradient(-45deg,
-    #00ff6a,  /* neon green */
-    #00bcd4,  /* teal */
-    #8e2de2,  /* purple */
-    #ff0080   /* hot pink */
-  );
-  background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite;
-  color: #fff;
-  font-family: 'Oswald', sans-serif;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-
 
 /* ===== MAIN FLEX LAYOUT ===== */
 main {

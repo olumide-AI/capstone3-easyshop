@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Confirmation</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 2em auto; }
+    .order-header { text-align: center; }
+    .order-details { margin-top: 1.5em; }
+    .line-item { border-bottom: 1px solid #ddd; padding: 0.5em 0; }
+    .total { font-weight: bold; margin-top: 1em; text-align: right; }
+    .btn-home { display: inline-block; margin-top: 2em; padding: 0.5em 1em; background: #007bff; color: white; text-decoration: none; border-radius: 4px;}
+  </style>
+</head>
+<body>
+  <div class="order-header">
+    <h1>Thank you for your order!</h1>
+    <p id="order-id"></p>
+  </div>
+
+  <div id="order-summary" class="order-details">
+    <!-- JavaScript will inject the list here -->
+  </div>
+
+  <a href="/" class="btn-home">← Back to Shop</a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('orderId');
+      const orderJson = sessionStorage.getItem('lastOrder');
+      if (!orderId || !orderJson) {
+        document.body.innerHTML = '<p>Sorry, we couldn’t find your order details.</p>';
+        return;
+      }
+
+      const order = JSON.parse(orderJson);
+      document.getElementById('order-id').innerText = `Order #${order.orderId} placed on ${new Date(order.placedAt).toLocaleString()}`;
+
+      const summary = document.getElementById('order-summary');
+      // line items
+      order.lineItems.forEach(li => {
+        const div = document.createElement('div');
+        div.classList.add('line-item');
+        div.innerHTML = `
+          <strong>${li.productName}</strong><br>
+          Quantity: ${li.quantity} × $${li.price.toFixed(2)} = $${(li.quantity * li.price).toFixed(2)}
+        `;
+        summary.appendChild(div);
+      });
+
+      // total
+      const totalDiv = document.createElement('div');
+      totalDiv.classList.add('total');
+      totalDiv.innerText = `Total Paid: $${order.total.toFixed(2)}`;
+      summary.appendChild(totalDiv);
+
+      // clear it so refresh doesn’t duplicate
+      sessionStorage.removeItem('lastOrder');
+    });
+  </script>
+</body>
+</html>

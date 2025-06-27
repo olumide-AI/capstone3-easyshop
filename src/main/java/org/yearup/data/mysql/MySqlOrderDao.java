@@ -24,17 +24,18 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
      */
     @Override
     public Order create(Order order){
-        final String query = "INSERT INTO orders (user_id, date, address, city, state, zip, shipping_amount) VALUES (?, NOW(), ?,?,?,?,?";
+        final String query = "INSERT INTO orders (user_id, date, address, city, state, zip, shipping_amount) VALUES (?,?,?,?,?,?,?)";
         try (
                 Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
                 ){
             ps.setInt(1, order.getUserId());
-            ps.setString(2, order.getAddress());
-            ps.setString(3, order.getCity());
-            ps.setString(4, order.getState());
-            ps.setString(5, order.getZip());
-            ps.setBigDecimal(6, order.getShippingAmount());
+            ps.setObject(2, order.getDate());
+            ps.setString(3, order.getAddress());
+            ps.setString(4, order.getCity());
+            ps.setString(5, order.getState());
+            ps.setString(6, order.getZip());
+            ps.setBigDecimal(7, order.getShippingAmount());
 
             ps.executeUpdate();
             try(ResultSet rs = ps.getGeneratedKeys()){
@@ -48,4 +49,5 @@ public class MySqlOrderDao extends MySqlDaoBase implements OrderDao {
             throw new RuntimeException("Error inserting order", e);
         }
     }
+
 }

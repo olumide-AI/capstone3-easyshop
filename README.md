@@ -1,4 +1,4 @@
-# EasyShop
+[# EasyShop
 
 A Java-based e-commerce application for managing products, customers, and orders with a focus on simplicity and scalability.
 
@@ -166,6 +166,12 @@ To preview the frontend of EasyShop with live updates:
 
 ---
 
+## Version Control & Tags
+
+To maintain a clean, understandable development history, EasyShop uses **Git tags** to mark significant milestones in the project.
+Tags help track important versions such as major feature completions, stable releases, or refactoring points.
+
+---
 **Note:**
 - For detailed installation steps on each tool (Java, IntelliJ, Git, MySQL, Postman), refer to your Year Up Software Installation Guide or the official documentation linked above.
 - For a consistent development experience, it’s recommended to use **Google Chrome** as your browser.
@@ -250,20 +256,20 @@ To start the backend manually in your IDE:
 
 Here’s a preview of the EasyShop homepage and key features:
 
-### 🏠 Homepage with Product Categories, Search, and Filters
+### Homepage with Product Categories, Search, and Filters
 
 - Displays all product categories clearly, making it easy for users to browse and find items.
 - Interactive search bar and filters let users quickly find products by name, category, or price.
 
 ![Homepage with Product Categories](images/homescreen.png)
 
-### 👤 Profile Management
+### Profile Management
 
 - Profile section: update or create your user profile, keeping customer details current.
 
 ![Profile Screen](images/profile.png)
 
-### 🛒 Shopping Cart
+### Shopping Cart
 
 - Cart feature: add items, view cart details, and proceed to checkout seamlessly.
 
@@ -305,3 +311,4 @@ public void getAllCategoriesTest() {
 ## License
 
 No License at this time 
+]()

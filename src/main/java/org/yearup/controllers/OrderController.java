@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.yearup.data.*;
 import org.yearup.models.*;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDateTime;
 
@@ -59,11 +60,13 @@ public class OrderController {
         Order order = new Order(userId, LocalDateTime.now(), profile.getAddress(), profile.getCity(), profile.getState(), profile.getZip());
         order = orderDao.create(order);
 
-        for(ShoppingCartItem item: shoppingCart.getItems().values()){
-            OrderLineItem orderLineItem = new OrderLineItem(
-                    item.getProduct().getProductId(),
-                    item.getProduct().getPrice(),
-                    item.getQuantity());
+        for(ShoppingCartItem cartItem: shoppingCart.getItems().values()){
+            OrderLineItem orderLineItem = new OrderLineItem();
+            orderLineItem.setProductId(cartItem.getProduct().getProductId());
+            orderLineItem.setSalesPrice(cartItem.getProduct().getPrice());
+            orderLineItem.setQuantity(cartItem.getQuantity());
+            orderLineItem.setDiscount(BigDecimal.ZERO);
+
             orderLineItemDao.create(order.getOrderId(), orderLineItem);
             order.addLineItem(orderLineItem);
 
