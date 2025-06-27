@@ -1,48 +1,111 @@
 <div class="presentation">
 
+  <!-- Hero / Introduction -->
   <section class="hero d-flex flex-column justify-content-center text-center">
     <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">
       🎤 EasyShop: My Code Journey
     </h1>
     <p class="lead animate__animated animate__fadeInUp">
-      Building a real-world e-commerce platform with dynamic filters, login, and a shopping cart.
+      A full-featured Java-based e-commerce platform with dynamic filters, login, and a shopping cart.
     </p>
   </section>
 
+  <!-- About -->
   <section class="section-light">
     <h2 class="fw-bold mb-4">About the Project 🚀</h2>
     <p class="fs-5">
-      I developed EasyShop as a capstone project to learn modular JavaScript, real service-based architecture, and build a realistic shopping experience with filtering, carts, and authentication.
+      EasyShop is an educational and practical e-commerce app I built to practice real-world coding standards.
+      It simulates an online shopping system using modular Java services, CRUD operations, and database integration.
     </p>
   </section>
 
+  <!-- Features -->
   <section class="section-dark">
-    <h2 class="fw-bold mb-4">Stack and Tools 🛠️</h2>
+    <h2 class="fw-bold mb-4">Key Features ✨</h2>
     <ul class="list-unstyled fs-5">
-      <li><strong>Frontend:</strong> HTML, CSS, Bootstrap, Mustache.js</li>
-      <li><strong>JavaScript:</strong> Modular services for products, users, profiles, and carts</li>
-      <li><strong>Other:</strong> Axios, Git, Figma, Chrome DevTools</li>
+      <li>🛍️ Manage products: add, update, delete, list</li>
+      <li>👤 Customer registration and profile management</li>
+      <li>🧾 Create and process orders</li>
+      <li>✅ Console and web-based UI with dynamic filters</li>
+      <li>🔎 Search products by category, price, and color</li>
     </ul>
   </section>
 
+  <!-- Architecture -->
   <section class="section-light">
-    <h2 class="fw-bold mb-4">Code Highlight 💻</h2>
-    <pre class="bg-dark text-white p-4 rounded"><code>productService.getAll().then(renderProducts);</code></pre>
+    <h2 class="fw-bold mb-4">Architecture Overview 🏗️</h2>
+    <ul class="list-unstyled fs-5">
+      <li><strong>Presentation:</strong> Console-based UI & dynamic frontend</li>
+      <li><strong>Service Layer:</strong> Business logic handling products, customers, and orders</li>
+      <li><strong>DAO Layer:</strong> Data access for CRUD operations</li>
+      <li><strong>Model Layer:</strong> Java classes representing domain entities</li>
+      <li>🔌 Designed for separation of concerns and easy testing</li>
+    </ul>
   </section>
 
+  <!-- Technologies -->
   <section class="section-dark">
+    <h2 class="fw-bold mb-4">Technologies & Tools 🛠️</h2>
+    <ul class="list-unstyled fs-5">
+      <li><strong>Languages:</strong> Java 17+, HTML, CSS, JavaScript</li>
+      <li><strong>Libraries & Frameworks:</strong> Bootstrap, Mustache.js, Axios</li>
+      <li><strong>Testing:</strong> JUnit 5, Mockito</li>
+      <li><strong>Database:</strong> MySQL</li>
+      <li><strong>Build & IDE:</strong> Maven, IntelliJ IDEA</li>
+    </ul>
+  </section>
+
+  <!-- Screenshots (optional visuals) -->
+  <section class="section-light">
+    <h2 class="fw-bold mb-4">Screenshots 📸</h2>
+    <p class="fs-5">Homepage with categories and filters:</p>
+    <img src="../images/homescreen.png" alt="Homepage" class="screenshot" />
+    <p class="mt-4 fs-5">Profile management and shopping cart:</p>
+    <img src="../images/profile.png" alt="Profile Screen" class="screenshot" />
+    <img src="../images/cart.png" alt="Cart Screen" class="screenshot" />
+  </section>
+
+  <!-- Code Highlight -->
+  <section class="section-dark">
+    <h2 class="fw-bold mb-4">Code Highlight 💻</h2>
+    <pre class="bg-dark text-white p-4 rounded fs-5"><code>@Test
+public void getAllCategoriesTest() {
+    List<Category> expectedCategoryList = new ArrayList<>();
+    expectedCategoryList.add(new Category(1, "charger", "A phone charger"));
+    expectedCategoryList.add(new Category(2, "iphone", "An iPhone"));
+
+    when(categoryDao.getAllCategories()).thenReturn(expectedCategoryList);
+
+    List<Category> categoryList = controller.getAll();
+
+    assertThat(categoryList)
+        .isNotEmpty()
+        .isEqualTo(expectedCategoryList)
+        .hasSize(2);
+}</code></pre>
+  </section>
+
+  <!-- Lessons Learned -->
+  <section class="section-light">
     <h2 class="fw-bold mb-4">Lessons Learned 📚</h2>
     <p class="fs-5">
-      I learned how to structure large projects, debug asynchronous operations, and design maintainable, modular frontend systems.
+      Through EasyShop, I learned:
+      <ul class="list-unstyled fs-5">
+        <li>✅ How to structure modular, scalable projects</li>
+        <li>✅ Writing effective unit tests with Mockito & JUnit</li>
+        <li>✅ Building maintainable frontend services with dynamic UI updates</li>
+        <li>✅ Debugging async API calls with Axios</li>
+      </ul>
     </p>
   </section>
 
+  <!-- Thank You -->
   <section class="hero d-flex flex-column justify-content-center text-center">
     <h2 class="display-5 fw-bold mb-4 animate__animated animate__fadeInDown">
       🙏 Thank You!
     </h2>
     <p class="lead animate__animated animate__fadeInUp">
-      Feel free to ask about EasyShop — I’m excited to share more!
+      I’m excited to share EasyShop — let’s connect or explore my code together!
     </p>
   </section>
 

@@ -165,7 +165,22 @@ To preview the frontend of EasyShop with live updates:
         - **Sources**: Set breakpoints and debug JavaScript.
 
 ---
+## API Reference
 
+### GET /products
+- **Description:** Retrieve all products.
+- **Response Example:**
+```json
+[
+  {
+    "productId": 1,
+    "name": "Laptop",
+    "price": 899.99
+  }
+]
+```
+
+---
 ## Version Control & Tags
 
 To maintain a clean, understandable development history, EasyShop uses **Git tags** to mark significant milestones in the project.
@@ -308,7 +323,21 @@ public void getAllCategoriesTest() {
 ```
 ---
 
+## Project Roadmap / Future Features:
+
+- Integrate payment gateway simulation
+- Better User interface on frontend
+
+## Known Issues
+
+- No pagination in product listings.
+- Limited input validation in console UI.
+
+## Author
+
+- **Name:** Olumide Kolawole
+- **LinkedIn:** [Linkedin](linkedin.com/in/olumidekolawole26)
+
 ## License
 
 No License at this time 
-]()
