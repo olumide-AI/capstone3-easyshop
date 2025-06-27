@@ -33,6 +33,11 @@ public class ShoppingCart
         return items.get(productId);
     }
 
+    /**
+     * Calculates the total cost of the shopping cart by summing all line item totals.
+     * @return the grand total as a BigDecimal.
+     */
+    //Chat gpt chat bot was used to assist in generating method
     public BigDecimal getTotal()
     {
         BigDecimal total = items.values()

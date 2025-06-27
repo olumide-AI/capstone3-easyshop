@@ -3,6 +3,7 @@ package org.yearup.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ShoppingCartItem
 {
@@ -51,14 +52,27 @@ public class ShoppingCartItem
         return this.product.getProductId();
     }
 
+    //Chat gpt chat bot was used to assist in generating method
+    /**
+     * Calculates the total price for this line item, applying quantity and discount.
+     * @return the final line total after discount.
+     * @throws IllegalStateException if product or price is missing.
+     */
     public BigDecimal getLineTotal()
     {
+        if (product == null || product.getPrice() == null) {
+            throw new IllegalStateException("Product or product price is missing for cart item");
+        }
+
         BigDecimal basePrice = product.getPrice();
-        BigDecimal quantity = new BigDecimal(this.quantity);
+        BigDecimal qty = BigDecimal.valueOf(this.quantity);
 
-        BigDecimal subTotal = basePrice.multiply(quantity);
-        BigDecimal discountAmount = subTotal.multiply(discountPercent);
+        BigDecimal subTotal = basePrice.multiply(qty);
+        BigDecimal discount = discountPercent != null ? discountPercent : BigDecimal.ZERO;
+        BigDecimal discountAmount = subTotal.multiply(discount);
 
-        return subTotal.subtract(discountAmount);
+        BigDecimal lineTotal = subTotal.subtract(discountAmount);
+        return lineTotal.setScale(2, RoundingMode.HALF_UP);
     }
+
 }
