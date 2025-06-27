@@ -16,7 +16,7 @@ import java.util.List;
 @CrossOrigin
 public class ProductsController
 {
-    private ProductDao productDao;
+    private final ProductDao productDao;
 
     @Autowired
     public ProductsController(ProductDao productDao)
@@ -141,7 +141,7 @@ public class ProductsController
         }
         catch(Exception e)
         {
-            throw new CustomDataException("Error creating product", e);
+            throw new CustomDataException("Error deleting product", e);
         }
     }
 }

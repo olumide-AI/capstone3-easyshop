@@ -33,6 +33,13 @@ public class OrderController {
         this.userDao = userDao;
     }
 
+    /**
+     * Performs checkout for the authenticated user's shopping cart, creating a new order
+     * with corresponding order line items and clearing the cart upon success.
+     * @param principal the authenticated user's principal.
+     * @return the created Order object, including order details.
+     * @throws ResponseStatusException if the cart is empty or profile is missing.
+     */
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Order checkout(Principal principal){

@@ -24,8 +24,8 @@ import java.security.Principal;
 @RequestMapping("/cart")
 public class ShoppingCartController
 {
-    private ShoppingCartDao shoppingCartDao;
-    private UserDao userDao;
+    private final ShoppingCartDao shoppingCartDao;
+    private final UserDao userDao;
 
     @Autowired
     public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao){
