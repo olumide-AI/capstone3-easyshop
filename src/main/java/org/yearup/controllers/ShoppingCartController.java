@@ -5,36 +5,39 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.yearup.data.ProductDao;
 import org.yearup.data.ShoppingCartDao;
 import org.yearup.data.UserDao;
-import org.yearup.models.Product;
 import org.yearup.models.ShoppingCart;
 import org.yearup.models.ShoppingCartItem;
 import org.yearup.models.User;
 
 import java.security.Principal;
 
-// convert this class to a REST controller
+/**
+ * ShoppingCartController exposes REST endpoints to manage the shopping cart
+ * for authenticated users. Only users with ROLE_USER can access these endpoints.
+ * Supported operations include viewing the cart, adding products, updating quantities,
+ * clearing the cart, and deleting individual items.
+ */
 @RestController
-// only logged users should have access to these actions
 @PreAuthorize("hasRole('ROLE_USER')")
 @RequestMapping("/cart")
 public class ShoppingCartController
 {
-    // a shopping cart requires
     private ShoppingCartDao shoppingCartDao;
     private UserDao userDao;
 
-    //Constructor injection
     @Autowired
     public ShoppingCartController(ShoppingCartDao shoppingCartDao, UserDao userDao){
         this.shoppingCartDao = shoppingCartDao;
         this.userDao = userDao;
     }
 
-    // each method in this controller requires a Principal object as a parameter
-    //Get the whole cart
+    /**
+     * Retrieves the current user's shopping cart.
+     * @param principal the authenticated user's principal.
+     * @return the ShoppingCart for the logged-in user.
+     */
     @GetMapping()
     public ShoppingCart getCart(Principal principal)
     {
@@ -55,22 +58,26 @@ public class ShoppingCartController
         }
     }
 
-    // add a POST method to add a product to the cart - the url should be
-    // https://localhost:8080/cart/products/15 (15 is the productId to be added
+    /**
+     * Adds a product to the current user's cart or increases quantity if it already exists.
+     * Quantity can be provided via either 'quantity' or 'qty' request parameter.
+     * @param id the product ID.
+     * @param quantityParam fallback quantity parameter (default=1).
+     * @param qtyAlias optional quantity parameter alternative.
+     * @param principal the authenticated user's principal.
+     * @return the added ShoppingCartItem.
+     */
     @PostMapping("/products/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingCartItem addProduct(@PathVariable int id,
                                        @RequestParam(name = "quantity", defaultValue = "1") int quantityParam,
                                        @RequestParam(name = "qty", required = false) Integer qtyAlias, Principal principal){
         int quantity = (qtyAlias != null) ? qtyAlias : quantityParam;
-        //System.out.println("controller qty = " + quantity);
         if (quantity <= 0) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Quantity must be positive");
         }
-        //Find how to get user using jwt and spring. We should be logged in already
-        //our application know we logged in and how to get it from the jwt
-        //And you should figure out to rturn a single cart item
+
         try{
             String userName = principal.getName();
             User user = userDao.getByUserName(userName);
@@ -90,9 +97,12 @@ public class ShoppingCartController
 
 
 
-    // add a PUT method to update an existing product in the cart - the url should be
-    // https://localhost:8080/cart/products/15 (15 is the productId to be updated)
-    // the BODY should be a ShoppingCartItem - quantity is the only value that will be updated
+    /**
+     * Updates the quantity of an existing product in the cart.
+     * @param id the product ID.
+     * @param body the ShoppingCartItem containing the new quantity.
+     * @param principal the authenticated user's principal.
+     */
     @PutMapping("/products/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateQuantity(@PathVariable int id, @RequestBody ShoppingCartItem body, Principal principal){
@@ -118,8 +128,10 @@ public class ShoppingCartController
     }
 
 
-    // add a DELETE method to clear all products from the current users cart
-    // https://localhost:8080/cart
+    /**
+     * Clears all products from the current user's shopping cart.
+     * @param principal the authenticated user's principal.
+     */
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(Principal principal){

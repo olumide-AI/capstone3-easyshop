@@ -12,6 +12,12 @@ import org.yearup.models.User;
 
 import java.security.Principal;
 
+// @Stanislav Hryshchuk assisted with Debugging profile controller and changes to the backedn
+/**
+ * ProfileController exposes REST endpoints for authenticated users
+ * to view and update their profile information. Profile data is
+ * always tied to the currently logged-in user.
+ */
 @RestController
 @RequestMapping("/profile")
 @CrossOrigin
@@ -26,6 +32,12 @@ public class ProfileController {
         this.userDao = userDao;
     }
 
+    /**
+     * Retrieves the profile of the currently authenticated user.
+     * @param principal the authenticated user's principal.
+     * @return the Profile of the user.
+     * @throws ResponseStatusException if the profile is not found or an error occurs.
+     */
     @GetMapping()
     public Profile getProfileByUserId(Principal principal){
         Profile profile;
@@ -52,12 +64,16 @@ public class ProfileController {
 
     }
 
+    /**
+     * Updates the profile of the currently authenticated user.
+     * @param profile the new profile data to update.
+     * @param principal the authenticated user's principal.
+     * @throws ResponseStatusException if the profile does not exist or an error occurs.
+     */
     @PutMapping()
     @PreAuthorize("hasRole('ROLE_USER')")
     public void updateProfile(@RequestBody Profile profile, Principal principal){
-//        if (profile.getFirstName() == null || profile.getFirstName().isBlank()){
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "First name is required");
-//        }
+
         String userName = principal.getName();
         // find database user by userId
         User user = userDao.getByUserName(userName);
