@@ -1,4 +1,22 @@
 /* ===== HEADER ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Oswald', sans-serif;
+  background: linear-gradient(135deg, #1d3557, #457b9d, #2a9d8f, #e9c46a);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  color: #fff;
+  overflow-x: hidden; /* avoid horizontal scroll with animated background */
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -54,11 +72,14 @@ main {
 /* ===== SIDEBAR FILTER BOX ===== */
 main > .filter-box {
   width: 350px;
-  flex-shrink: 0;             /* sidebar stays fixed width */
+  flex-shrink: 0;
   padding: 15px;
-  overflow-y: auto;           /* scroll if needed */
+  overflow-y: auto;
   height: 100%;
-  background-color: #f8f9fa;  /* optional: light background */
+  /* Remove static light background */
+  background: rgba(0, 0, 0, 0.4); /* semi-transparent dark overlay */
+  color: #fff; /* ensure text remains readable on dark background */
+  border-right: 1px solid rgba(255, 255, 255, 0.2); /* subtle separator */
 }
 
 /* ===== PRICE SLIDER ===== */

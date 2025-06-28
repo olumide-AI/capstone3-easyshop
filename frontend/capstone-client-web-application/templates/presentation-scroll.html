@@ -1,74 +1,215 @@
 <div class="presentation">
 
-  <!-- Hero / Introduction -->
-  <section class="hero d-flex flex-column justify-content-center text-center">
+<section class="hero d-flex flex-column justify-content-center text-center text-white">
+  <div class="hero-overlay">
     <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">
-      🎤 EasyShop: My Code Journey
+      EasyShop: Real-World E-commerce
     </h1>
     <p class="lead animate__animated animate__fadeInUp">
-      A full-featured Java-based e-commerce platform with dynamic filters, login, and a shopping cart.
+      Building your one stop shop e-commerce platform
     </p>
-  </section>
+  </div>
+</section>
 
-  <!-- About -->
-  <section class="section-light">
-    <h2 class="fw-bold mb-4">About the Project 🚀</h2>
-    <p class="fs-5">
-      EasyShop is an educational and practical e-commerce app I built to practice real-world coding standards.
-      It simulates an online shopping system using modular Java services, CRUD operations, and database integration.
-    </p>
-  </section>
 
-  <!-- Features -->
-  <section class="section-dark">
-    <h2 class="fw-bold mb-4">Key Features ✨</h2>
-    <ul class="list-unstyled fs-5">
-      <li>🛍️ Manage products: add, update, delete, list</li>
-      <li>👤 Customer registration and profile management</li>
-      <li>🧾 Create and process orders</li>
-      <li>✅ Console and web-based UI with dynamic filters</li>
-      <li>🔎 Search products by category, price, and color</li>
-    </ul>
-  </section>
+<section class="video-hero">
+  <video autoplay muted loop playsinline class="video-hero-video">
+    <source src="stockphotos/6994619-sd_960_540_30fps.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+  <div class="video-hero-overlay">
 
-  <!-- Architecture -->
-  <section class="section-light">
-    <h2 class="fw-bold mb-4">Architecture Overview 🏗️</h2>
-    <ul class="list-unstyled fs-5">
-      <li><strong>Presentation:</strong> Console-based UI & dynamic frontend</li>
-      <li><strong>Service Layer:</strong> Business logic handling products, customers, and orders</li>
-      <li><strong>DAO Layer:</strong> Data access for CRUD operations</li>
-      <li><strong>Model Layer:</strong> Java classes representing domain entities</li>
-      <li>🔌 Designed for separation of concerns and easy testing</li>
-    </ul>
-  </section>
+  </div>
+</section>
 
-  <!-- Technologies -->
-  <section class="section-dark">
-    <h2 class="fw-bold mb-4">Technologies & Tools 🛠️</h2>
-    <ul class="list-unstyled fs-5">
-      <li><strong>Languages:</strong> Java 17+, HTML, CSS, JavaScript</li>
-      <li><strong>Libraries & Frameworks:</strong> Bootstrap, Mustache.js, Axios</li>
-      <li><strong>Testing:</strong> JUnit 5, Mockito</li>
-      <li><strong>Database:</strong> MySQL</li>
-      <li><strong>Build & IDE:</strong> Maven, IntelliJ IDEA</li>
-    </ul>
-  </section>
 
-  <!-- Screenshots (optional visuals) -->
-  <section class="section-light">
-    <h2 class="fw-bold mb-4">Screenshots 📸</h2>
-    <p class="fs-5">Homepage with categories and filters:</p>
-    <img src="../images/homescreen.png" alt="Homepage" class="screenshot" />
-    <p class="mt-4 fs-5">Profile management and shopping cart:</p>
-    <img src="../images/profile.png" alt="Profile Screen" class="screenshot" />
-    <img src="../images/cart.png" alt="Cart Screen" class="screenshot" />
-  </section>
 
-  <!-- Code Highlight -->
-  <section class="section-dark">
-    <h2 class="fw-bold mb-4">Code Highlight 💻</h2>
-    <pre class="bg-dark text-white p-4 rounded fs-5"><code>@Test
+
+<section class="section-dark">
+  <div class="container">
+    <h2 class="fw-bold mb-5 text-center">Key Features ✨</h2>
+    <div class="row justify-content-center">
+      
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/antonin-fels-OdqmOsUgNwk-unsplash.jpg" class="card-img-top" alt="Manage Products">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Product Management</h5>
+            <p class="card-text">
+              Add, update, and delete products with a dynamic, easy-to-use interface.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/dan-counsell-y57MGB34dEE-unsplash.jpg" class="card-img-top" alt="Customer Profiles">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Customer Profiles</h5>
+            <p class="card-text">
+              Seamlessly manage customer registration and profile updates.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/alexander-mils-lCPhGxs7pww-unsplash.jpg" class="card-img-top" alt="Orders">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Order Processing</h5>
+            <p class="card-text">
+              Create, view, and manage orders with detailed status tracking.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section-light">
+  <div class="container">
+    <h2 class="fw-bold mb-5 text-center">Architecture Overview 🏗️</h2>
+    <div class="row justify-content-center">
+      
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/joshua-reddekopp-YQnTaPvCLGo-unsplash.jpg" class="card-img-top" alt="Presentation Layer">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Presentation Layer</h5>
+            <p class="card-text">
+              Console-based UI & dynamic frontend for seamless interaction with users.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/absolutvision-82TpEld0_e4-unsplash.jpg" class="card-img-top" alt="Service Layer">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Service Layer</h5>
+            <p class="card-text">
+              Business logic managing products, customers, and orders, ensuring consistent workflows.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/tobias-fischer-PkbZahEG2Ng-unsplash.jpg" class="card-img-top" alt="DAO Layer">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">DAO Layer</h5>
+            <p class="card-text">
+              Direct access to the database with CRUD operations for reliable data management.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/hassaan-here-S5JkrDMN4YU-unsplash.jpg" class="card-img-top" alt="Model Layer">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Model Layer</h5>
+            <p class="card-text">
+              Java classes representing domain entities, ensuring a clear, organized data structure.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="feature-card card shadow-lg h-100">
+          <img src="stockphotos/brett-jordan-_21dJ-ItbkQ-unsplash.jpg" class="card-img-top" alt="Design Principles">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Design Principles</h5>
+            <p class="card-text">
+              Separation of concerns and interface-based design make the system maintainable and testable.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section-dark">
+  <h2 class="fw-bold mb-5 text-center">Technologies & Tools 🛠️</h2>
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+
+      <div class="col-md-4 col-lg-3">
+        <div class="card tech-card h-100">
+          <img src="stockphotos/michiel-leunens-0wIHsm2_1fc-unsplash.jpg" class="card-img-top" alt="Java">
+          <div class="card-body">
+            <h5 class="card-title text-center">Java 17+</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <div class="card tech-card h-100">
+          <img src="stockphotos/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" class="card-img-top" alt="HTML CSS JS">
+          <div class="card-body">
+            <h5 class="card-title text-center">HTML, CSS, JavaScript</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <div class="card tech-card h-100">
+          <img src="stockphotos/alan-hardman-Y-hl3rx5fr8-unsplash.jpg" class="card-img-top" alt="Bootstrap">
+          <div class="card-body">
+            <h5 class="card-title text-center">Bootstrap, Mustache.js, Axios</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <div class="card tech-card h-100">
+          <img src="stockphotos/ousa-chea-gKUC4TMhOiY-unsplash.jpg" class="card-img-top" alt="JUnit Mockito">
+          <div class="card-body">
+            <h5 class="card-title text-center">JUnit 5, Mockito</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <div class="card tech-card h-100">
+          <img src="stockphotos/rubaitul-azad-Y9kOsyoWyaU-unsplash.jpg" class="card-img-top" alt="MySQL">
+          <div class="card-body">
+            <h5 class="card-title text-center">MySQL</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3">
+        <div class="card tech-card h-100">
+          <img src="stockphotos/rubaitul-azad-xgcCGDGIcfY-unsplash.jpg" class="card-img-top" alt="Maven IntelliJ">
+          <div class="card-body">
+            <h5 class="card-title text-center">Maven & IntelliJ IDEA</h5>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section-dark">
+  <h2 class="fw-bold mb-4 text-center">Code Highlight 💻</h2>
+  <div class="container d-flex justify-content-center">
+    <div class="card code-card bg-dark text-white p-4">
+      <pre class="mb-0"><code>@Test
 public void getAllCategoriesTest() {
     List<Category> expectedCategoryList = new ArrayList<>();
     expectedCategoryList.add(new Category(1, "charger", "A phone charger"));
@@ -83,30 +224,184 @@ public void getAllCategoriesTest() {
         .isEqualTo(expectedCategoryList)
         .hasSize(2);
 }</code></pre>
-  </section>
+    </div>
+  </div>
+</section>
 
-  <!-- Lessons Learned -->
-  <section class="section-light">
-    <h2 class="fw-bold mb-4">Lessons Learned 📚</h2>
-    <p class="fs-5">
-      Through EasyShop, I learned:
-      <ul class="list-unstyled fs-5">
-        <li>✅ How to structure modular, scalable projects</li>
-        <li>✅ Writing effective unit tests with Mockito & JUnit</li>
-        <li>✅ Building maintainable frontend services with dynamic UI updates</li>
-        <li>✅ Debugging async API calls with Axios</li>
-      </ul>
-    </p>
-  </section>
 
-  <!-- Thank You -->
-  <section class="hero d-flex flex-column justify-content-center text-center">
-    <h2 class="display-5 fw-bold mb-4 animate__animated animate__fadeInDown">
-      🙏 Thank You!
-    </h2>
-    <p class="lead animate__animated animate__fadeInUp">
-      I’m excited to share EasyShop — let’s connect or explore my code together!
-    </p>
-  </section>
+<section class="section-light d-flex justify-content-center">
+  <div class="card lesson-card text-dark" style="max-width: 30rem;">
+
+    <img src="stockphotos/annie-spratt-feU8G7E5ODI-unsplash.jpg" class="card-img-top" alt="Lessons Learned">
+
+    <div class="card-body">
+      <h5 class="card-title text-center fw-bold">Lessons Learned 📚</h5>
+      <p class="card-text text-center">Through EasyShop, I learned:</p>
+    </div>
+
+    <ul class="list-group list-group-flush fs-5">
+      <li class="list-group-item">✅ Structuring modular, scalable projects</li>
+      <li class="list-group-item">✅ Writing effective unit tests with Mockito & JUnit</li>
+      <li class="list-group-item">✅ Building maintainable frontend services with dynamic UI updates</li>
+      <li class="list-group-item">✅ Debugging async API calls with Axios</li>
+    </ul>
+
+    <div class="card-body text-center">
+      <a href="mailto:olumidekolawole26@gmail.com" class="card-link">Contact Me</a>
+      <a href="https://github.com/olumide-AI" class="card-link">View My Code</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="section-dark py-5">
+  <h2 class="text-center fw-bold mb-4">🙏 Thank You to My Fellow Students</h2>
+
+  <div id="studentCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+
+      
+      <div class="carousel-item active">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🎉 Thank you, Maaike!</h3>
+        </div>
+      </div>
+
+   
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🌟 Great job! Ridwan!</h3>
+        </div>
+      </div>
+
+    
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🚀 You’re a star! Stan!</h3>
+        </div>
+      </div>
+
+            <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🙌 Keep shining! Alex!</h3>
+        </div>
+      </div>
+
+   
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🏆 Amazing work! Linda!</h3>
+        </div>
+      </div>
+
+    
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">💪 Well done! Faith!</h3>
+        </div>
+      </div>
+
+      <!-- Duplicate above block for up to 22 slides -->
+       <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">✨ Outstanding effort! Rosario!</h3>
+        </div>
+      </div>
+
+   
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🌟 Great job! Wilmer!</h3>
+        </div>
+      </div>
+
+    
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🥇 Number one! Paulo!</h3>
+        </div>
+      </div>
+
+            <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🌈 Keep going strong! Kabera!</h3>
+        </div>
+      </div>
+
+   
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🏆 Amazing work! Linda!</h3>
+        </div>
+      </div>
+
+    
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">💪 Well done! Faith!</h3>
+        </div>
+      </div>
+
+      <!-- Duplicate above block for up to 22 slides -->
+       <div class="carousel-item ">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🔥 You crushed it! Ryan!</h3>
+        </div>
+      </div>
+
+   
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🎯 Right on target! Quincy!</h3>
+        </div>
+      </div>
+
+    
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">📈 Always improving! Issac!</h3>
+        </div>
+      </div>
+
+            <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">💡 Brilliant mind! Rodas!</h3>
+        </div>
+      </div>
+
+   
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">🎨 Creative genius! Sarah!</h3>
+        </div>
+      </div>
+
+    
+      <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">💼 Future leader! John!</h3>
+        </div>
+      </div>
+
+            <div class="carousel-item">
+        <div class="d-flex justify-content-center align-items-center text-center" style="height: 300px;">
+          <h3 class="text-white">💼 🏅 Rising star! Preston!</h3>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Optional controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#studentCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#studentCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+
 
 </div>
